@@ -9,7 +9,7 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        struct ListNode *th1 = headA;
+        /*struct ListNode *th1 = headA;
         while (th1!=NULL)
         {
             struct ListNode *th2 = headB;
@@ -20,6 +20,21 @@ public:
             }
             th1 = th1 -> next;
         }
-        return NULL;
+        return NULL; tc : O(n2) sc : O(1)*/
+
+        unordered_set<ListNode*>s; //sc : O(n)
+        while (headA != nullptr) //tc : O(n)
+        {
+            s.insert(headA);
+            headA = headA -> next;
+        }
+        while (headB != nullptr) //tc: O(m)
+        {
+            if(s.count(headB) == 1)
+                return headB;
+            headB = headB -> next;
+        }
+        return nullptr; //tc: O(n + m) sc: O(n)
+
     }
 };
